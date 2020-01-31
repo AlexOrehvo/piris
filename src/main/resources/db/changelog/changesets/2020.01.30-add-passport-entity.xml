@@ -1,0 +1,30 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1.2" author="a.orehvo" runAlways="false">
+        <preConditions  onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="passports" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="passports">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="passport_identifier" type="varchar(255)" >
+                <constraints unique="true" nullable="false" />
+            </column>
+            <column name="identification_number" type="varchar(255)" >
+                <constraints unique="true" nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
