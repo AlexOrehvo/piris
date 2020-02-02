@@ -1,0 +1,97 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1.4" author="a.orehvo" runAlways="false">
+        <preConditions  onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="users" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="users">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="first_name" type="varchar(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="last_name" type="varchar(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="middle_name" type="varchar(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="birthday" type="date" >
+                <constraints nullable="false" />
+            </column>
+            <column name="email" type="varchar(255)" >
+                <constraints unique="true" />
+            </column>
+            <column name="home_phone_number" type="varchar(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="mobile_phone_number" type="varchar(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="pensioner" type="boolean" >
+                <constraints nullable="false" />
+            </column>
+            <column name="duty_bound" type="boolean" >
+                <constraints nullable="false" />
+            </column>
+            <column name="passport_id" type="bigserial" >
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="citizenship_id" type="bigserial" >
+                <constraints nullable="false" />
+            </column>
+            <column name="disability_id" type="bigserial" >
+                <constraints nullable="false" />
+            </column>
+            <column name="gender_id" type="bigserial" >
+                <constraints nullable="false" />
+            </column>
+            <column name="marital_status_id" type="bigserial" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+
+        <addForeignKeyConstraint baseColumnNames="passport_id"
+                                 baseTableName="users"
+                                 constraintName="fk_user_passport"
+                                 referencedColumnNames="id"
+                                 referencedTableName="passports"/>
+
+        <addForeignKeyConstraint baseColumnNames="citizenship_id"
+                                 baseTableName="users"
+                                 constraintName="fk_user_citizenship"
+                                 referencedColumnNames="id"
+                                 referencedTableName="citizenships"/>
+
+        <addForeignKeyConstraint baseColumnNames="disability_id"
+                                 baseTableName="users"
+                                 constraintName="fk_user_disability"
+                                 referencedColumnNames="id"
+                                 referencedTableName="disabilities"/>
+
+        <addForeignKeyConstraint baseColumnNames="gender_id"
+                                 baseTableName="users"
+                                 constraintName="fk_user_gender"
+                                 referencedColumnNames="id"
+                                 referencedTableName="genders"/>
+
+        <addForeignKeyConstraint baseColumnNames="marital_status_id"
+                                 baseTableName="users"
+                                 constraintName="fk_user_marital_status"
+                                 referencedColumnNames="id"
+                                 referencedTableName="marital_statuses"/>
+    </changeSet>
+</databaseChangeLog>

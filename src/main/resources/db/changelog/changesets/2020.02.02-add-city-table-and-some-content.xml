@@ -1,0 +1,49 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1.6" author="a.orehvo" runAlways="false">
+        <preConditions  onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cities" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="cities">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="name" type="varchar(255)" >
+                <constraints unique="true" nullable="false" />
+            </column>
+        </createTable>
+
+        <!-- cities -->
+        <insert tableName="cities">
+            <column name="id" value="1" />
+            <column name="uuid" valueComputed="uuid_generate_v4()" />
+            <column name="name" value="Minsk" />
+        </insert>
+        <insert tableName="cities">
+            <column name="id" value="2" />
+            <column name="uuid" valueComputed="uuid_generate_v4()" />
+            <column name="name" value="Moscow" />
+        </insert>
+        <insert tableName="cities">
+            <column name="id" value="3" />
+            <column name="uuid" valueComputed="uuid_generate_v4()" />
+            <column name="name" value="Glubokoe" />
+        </insert>
+        <insert tableName="cities">
+            <column name="id" value="4" />
+            <column name="uuid" valueComputed="uuid_generate_v4()" />
+            <column name="name" value="Brest" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>
