@@ -32,4 +32,14 @@ public class UserResource {
     public User updateUser(@Valid @RequestBody User user) {
         return userService.save(user);
     }
+
+    @GetMapping("{id}")
+    public User getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
+    }
+
+    @GetMapping("/test")
+    public User testError() {
+        throw new RuntimeException("Hello world");
+    }
 }
