@@ -1,0 +1,54 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1.11" author="a.orehvo" runAlways="false">
+        <insert tableName="deposits">
+            <column name="id" value="1" />
+            <column name="uuid" valueComputed="uuid_generate_v4()" />
+            <column name="name" value="The trend" />
+            <column name="percent" valueNumeric="0.5"/>
+            <column name="type" value="IRREVOCABLE"/>
+            <column name="currency" value="USD"/>
+        </insert>
+
+        <insert tableName="deposits">
+            <column name="id" value="2" />
+            <column name="uuid" valueComputed="uuid_generate_v4()" />
+            <column name="name" value="The trend" />
+            <column name="percent" valueNumeric="3.35"/>
+            <column name="type" value="IRREVOCABLE"/>
+            <column name="currency" value="BYN"/>
+        </insert>
+
+        <insert tableName="deposits">
+            <column name="id" value="3" />
+            <column name="uuid" valueComputed="uuid_generate_v4()" />
+            <column name="name" value="The trend" />
+            <column name="percent" valueNumeric="0.2"/>
+            <column name="type" value="REVOCABLE"/>
+            <column name="currency" value="USD"/>
+        </insert>
+
+        <insert tableName="deposits">
+            <column name="id" value="4" />
+            <column name="uuid" valueComputed="uuid_generate_v4()" />
+            <column name="name" value="The Harvest" />
+            <column name="percent" valueNumeric="11.75"/>
+            <column name="type" value="IRREVOCABLE"/>
+            <column name="currency" value="BYN"/>
+        </insert>
+
+        <insert tableName="deposits">
+            <column name="id" value="5" />
+            <column name="uuid" valueComputed="uuid_generate_v4()" />
+            <column name="name" value="The Harvest" />
+            <column name="percent" valueNumeric="5.8"/>
+            <column name="type" value="REVOCABLE"/>
+            <column name="currency" value="BYN"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

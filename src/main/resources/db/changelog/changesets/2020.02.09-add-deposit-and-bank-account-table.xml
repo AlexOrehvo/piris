@@ -1,0 +1,86 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1.9" author="a.orehvo" runAlways="false">
+        <preConditions  onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="deposits" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="deposits">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="name" type="varchar(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="percent" type="decimal" >
+                <constraints nullable="false" />
+            </column>
+            <column name="type" type="varchar(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="currency" type="varchar(255)" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="1.10" author="a.orehvo" runAlways="false">
+        <preConditions  onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="bank_accounts" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="bank_accounts">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="account_number" type="varchar(255)" >
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="account_amount" type="decimal" >
+                <constraints nullable="false" />
+            </column>
+            <column name="start_date" type="date" >
+                <constraints nullable="false" />
+            </column>
+            <column name="end_date" type="date" >
+                <constraints nullable="false" />
+            </column>
+            <column name="deposit_id" type="bigserial" >
+                <constraints nullable="false" />
+            </column>
+            <column name="creator_id" type="bigserial" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+
+        <addForeignKeyConstraint baseColumnNames="deposit_id"
+                                 baseTableName="bank_accounts"
+                                 constraintName="fk_account_deposit"
+                                 referencedColumnNames="id"
+                                 referencedTableName="deposits"/>
+
+        <addForeignKeyConstraint baseColumnNames="creator_id"
+                                 baseTableName="bank_accounts"
+                                 constraintName="fk_account_user"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -5,6 +5,8 @@ import com.piris.bank.domain.common.UUIDEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Table(name = "passports")
@@ -53,8 +55,9 @@ public class Passport extends UUIDEntity {
         this.identificationNumber = identificationNumber;
     }
 
-    public Date getDateOfIssue() {
-        return dateOfIssue;
+    public String getDateOfIssue() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(dateOfIssue);
     }
 
     public void setDateOfIssue(Date dateOfIssue) {

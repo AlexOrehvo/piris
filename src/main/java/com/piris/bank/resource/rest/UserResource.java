@@ -1,7 +1,6 @@
 package com.piris.bank.resource.rest;
 
 import com.piris.bank.domain.User;
-import com.piris.bank.repository.UserRepository;
 import com.piris.bank.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +40,10 @@ public class UserResource {
     @GetMapping("/test")
     public User testError() {
         throw new RuntimeException("Hello world");
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.delete(id);
     }
 }

@@ -3,6 +3,9 @@ package com.piris.bank.domain;
 import com.piris.bank.domain.common.UUIDEntity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Table(name = "users")
@@ -38,6 +41,9 @@ public class User extends UUIDEntity {
 
     @Column(nullable = false)
     private String address;
+
+    @Column
+    private BigDecimal monthlyIncome;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "passport_id")
@@ -87,8 +93,9 @@ public class User extends UUIDEntity {
         this.middleName = middleName;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getBirthday() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(birthday);
     }
 
     public void setBirthday(Date birthday) {
@@ -189,5 +196,13 @@ public class User extends UUIDEntity {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public BigDecimal getMonthlyIncome() {
+        return monthlyIncome;
+    }
+
+    public void setMonthlyIncome(BigDecimal monthlyIncome) {
+        this.monthlyIncome = monthlyIncome;
     }
 }
